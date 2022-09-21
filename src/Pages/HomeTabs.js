@@ -14,12 +14,12 @@ const HomeScreens = () => {
             <Tab.Screen name="HomeStack" component={HomeStack} options={{
                 title:"Home",
                 tabBarIcon: ({ color }) => (
-                    <Icons name='musical-notes-outline' size={24} color={color} />
+                    <Icons name='home-outline' size={24} color={color} />
                 )
             }}/>
             <Tab.Screen name="Map" component={Map}options={{
                 tabBarIcon: ({ color }) => (
-                    <Icons name='search' size={24} color={color} />
+                    <Icons name='map-outline' size={24} color={color} />
                 )
             }} />
             <Tab.Screen name="Settings" component={SettingStack}options={{

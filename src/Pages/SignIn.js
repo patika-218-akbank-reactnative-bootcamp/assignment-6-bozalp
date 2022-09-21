@@ -41,7 +41,7 @@ const SignIn = ({ navigation }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-            <Text style={[styles.header, { color: theme.color, padding: 30, letterSpacing: 5 }]}>Best Music App</Text>
+            <Text style={[styles.header, { color: theme.color, padding: 30, letterSpacing: 5 }]}>Best Social Media</Text>
             <View style={{ margin: 10, }}>
                 <Text style={{ color: theme.color, paddingBottom: 30 }}>Login</Text>
 

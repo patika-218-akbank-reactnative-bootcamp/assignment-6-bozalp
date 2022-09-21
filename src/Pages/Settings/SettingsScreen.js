@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Theme from './Theme';
+import Button from '../../Components/Button';
 
 const SettingsScreen = ({ navigation }) => {
     const theme = useSelector((state) => state.theme.theme);
@@ -30,27 +31,14 @@ const SettingsScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-            <View style={{ alignItems: 'center', }}>
-                <TouchableOpacity activeOpacity={0.7} onPress={goToTheme}
-                    style={[styles.buttons, { borderWidth: 1, borderColor: theme.color }]}>
-                    <Text style={{ color: theme.color }}>
-                        Theme
-                    </Text>
-                </TouchableOpacity>
+            <View style={styles.area}>
+                <View>
+                    <Button title={"Theme"} onPress={() => goToTheme()} />
+                    <Button title={"Edit Profile"} onPress={null} />
+                </View>
 
-                <TouchableOpacity activeOpacity={0.7} onPress={null}
-                    style={[styles.buttons, { borderWidth: 1, borderColor: theme.color }]}>
-                    <Text style={{ color: theme.color }}>
-                        Edit Profile
-                    </Text>
-                </TouchableOpacity>
+                <Button title={"Logout"} onPress={() => LogOut()} />
 
-                <TouchableOpacity activeOpacity={0.7} onPress={() => LogOut()}
-                    style={[styles.buttons, { borderWidth: 1, borderColor: theme.color }]}>
-                    <Text style={{ color: theme.color }}>
-                        Logout
-                    </Text>
-                </TouchableOpacity>
             </View>
         </View>
     );
@@ -60,23 +48,14 @@ const styles = StyleSheet.create({
     container:
     {
         flex: 1,
-        padding: 10,
-    },
-    header:
-    {
-        fontSize: 18,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    buttons:
-    {
-        width: '80%',
-        height: 64,
-        marginBottom: 10,
-        justifyContent: 'center',
+        padding: 20,
         alignItems: 'center',
-        borderRadius: 10,
     },
+    area:
+    {
+        flex: 1,
+        justifyContent:'space-between',
+    }
 });
 
 export default SettingsScreen;
