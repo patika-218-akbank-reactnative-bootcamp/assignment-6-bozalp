@@ -61,7 +61,7 @@ const SplashScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Icons name='musical-notes' size={72} color={"black"} />
+            <Icons name='logo-snapchat' size={72} color={"black"} />
             <Text style={styles.title}>
                 Best Snapchat
             </Text>

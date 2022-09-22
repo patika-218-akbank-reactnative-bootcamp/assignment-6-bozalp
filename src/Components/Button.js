@@ -18,7 +18,7 @@ const Button = ({ title, onPress }) => {
 const styles = StyleSheet.create({
     buttons:
     {
-        width: 150,
+        width: 180,
         height: 64,
         marginBottom: 15,
         justifyContent: 'center',

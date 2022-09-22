@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 100,
         backgroundColor: '#ccc',
-        paddingTop:90
+        justifyContent:'center'
     },
     change_text:
     {
