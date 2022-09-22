@@ -32,8 +32,6 @@ const SplashScreen = ({ navigation }) => {
             })
             .catch(error => {
                 navigation.navigate("SignIn");
-                //console.log("hata>" + email + password);
-                //Alert.alert(error.message)
             });
 
     }
@@ -45,7 +43,6 @@ const SplashScreen = ({ navigation }) => {
                 navigation.navigate("HomeScreens");
             })
             .catch(error => {
-                //console.log("hata>" + email + password);
                 Alert.alert(error.message)
             });
     }
@@ -66,7 +63,7 @@ const SplashScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Icons name='musical-notes' size={72} color={"black"} />
             <Text style={styles.title}>
-                Best Music App
+                Best Snapchat
             </Text>
         </View>
     );
