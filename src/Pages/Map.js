@@ -1,8 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Dimensions, Alert } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE, Marker, LatLng } from 'react-native-maps';
 import * as Location from 'expo-location';
+
+const CustomMarker = ({ coordinate, imageUrl }) => {
+
+function s()
+{
+    Alert.alert("sa");
+}
+
+    return (
+        <Marker coordinate={coordinate} onPress={s}>            
+            <View style={styles.image_area}>
+                <Image
+                    style={styles.image}
+                    source={{
+                        uri: imageUrl
+                    }}
+                />
+                <View style={styles.triangle} />
+            </View>      
+        </Marker >
+    )
+}
 
 const Map = () => {
     const theme = useSelector((state) => state.theme.theme);
@@ -32,32 +54,21 @@ const Map = () => {
                 });
             },
         );
-        // Alert.alert(location);
-    };
-
-    const updateUsersCurrentLocation = async location => {
-        //const docRef = doc(db, 'user', user.id);
-        await updateDoc(docRef, {
-            currentLocation: {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-            },
-        });
     };
 
     useEffect(() => {
         getCurrentLocation();
-        Alert.alert("sa");
+        // Alert.alert("sa");
     }, []);
 
-    /*const loc = {
-        latitude: myLocation.latitude,
-        longitude: myLocation.longitude,
-        latitudeDelta: myLocation.latitudeDelta,
-        longitudeDelta: myLocation.longitudeDelta
-    }*/
     const coordDolmabahce = {
         latitude: 41.0391683,
+        longitude: 28.9982707,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+    };
+    const coordDolmabahce2 = {
+        latitude: 40.0391683,
         longitude: 28.9982707,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
@@ -69,17 +80,19 @@ const Map = () => {
                 Map
             </Text>
             <MapView
-                 initialRegion={coordDolmabahce}
-                //showsMyLocationButton
+                initialRegion={coordDolmabahce}
+                showsMyLocationButton
                 mapType="standard"
-               // ref={mapRef}
+                // ref={mapRef}
                 showsScale
                 showsUserLocation
                 style={styles.map}
             //minZoomLevel={15}
             >
-                
-                
+                <CustomMarker coordinate={coordDolmabahce} imageUrl={'https://firebasestorage.googleapis.com/v0/b/snapchatapp-de814.appspot.com/o/b8b40622-f1e1-4c73-8f50-840bdd85266b?alt=media&token=abf69362-2762-4b5d-8532-0e55fd6dd0ad'} />
+                <CustomMarker coordinate={coordDolmabahce2} imageUrl={'https://firebasestorage.googleapis.com/v0/b/snapchatapp-de814.appspot.com/o/b8b40622-f1e1-4c73-8f50-840bdd85266b?alt=media&token=abf69362-2762-4b5d-8532-0e55fd6dd0ad'} />
+
+
 
             </MapView>
             {/*  <MapView
@@ -108,6 +121,32 @@ const styles = StyleSheet.create({
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
+    },
+    image_area:
+    {
+        alignItems: 'center',
+    },
+    image:
+    {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        borderColor: 'red',
+        borderWidth: 3,
+    },
+    triangle: {
+        width: 0,
+        height: 0,
+        backgroundColor: "transparent",
+        borderStyle: "solid",
+        borderLeftWidth: 10,
+        borderRightWidth: 10,
+        borderBottomWidth: 25,
+        borderLeftColor: "transparent",
+        borderRightColor: "transparent",
+        borderBottomColor: "red",
+        bottom: 5,
+        transform: [{ rotate: "180deg" }],
     },
 });
 
