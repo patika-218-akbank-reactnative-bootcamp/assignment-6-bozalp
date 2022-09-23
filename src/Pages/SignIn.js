@@ -24,7 +24,6 @@ const SignIn = ({ navigation }) => {
                 console.log("giris basarili");
                 console.log(user.email);
                 console.log(user.password);
-                //setNewUser(email = user.email, password = user.password);
                 setUserStorage();
                 navigation.navigate("HomeScreens");
             })

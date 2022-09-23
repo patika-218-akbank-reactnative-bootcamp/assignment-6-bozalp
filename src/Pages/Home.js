@@ -19,7 +19,6 @@ const Home = ({ navigation }) => {
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [imageList, setImageList] = useState([]);
-  const [im, sets] = useState(null);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -59,32 +58,12 @@ const Home = ({ navigation }) => {
   };
 
 
-  function listImages() {
-    const storage = getStorage();
-    const listRef = ref(storage, '/');
-    listAll(listRef)
-      .then((res) => {
-        res.items.forEach((itemRef) => {
-          //gelen veriyi alabilmek için belirli bir formata uyarladım
-          const url = "https://firebasestorage.googleapis.com/v0/b/" + itemRef.bucket + "/o/" + itemRef.fullPath + "?alt=media&token=abf69362-2762-4b5d-8532-0e55fd6dd0ad";
-          //setImageList(url);
-          console.log(url);
-          setImageList((prev) => [...prev, url]);
-          /* getDownloadURL(itemRef).then((url) => {
-             setImageList((prev) => [...prev, url]);
-           });*/
-        });
-      }).catch((error) => {
-        // Uh-oh, an error occurred!
-      });
-  }
 
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
       <Text style={[styles.header_text, { color: theme.color }]}>Share image</Text>
       <View>
         <Button title="Select from gallery" onPress={pickImage} />
-        <Button title="Display images" onPress={listImages} />
       </View>
       <View>
         {image &&
@@ -93,24 +72,6 @@ const Home = ({ navigation }) => {
             <Button title="Share image" onPress={uploadImage} />
           </View>
         }
-        <View>
-          <Text>
-            sa
-          </Text>
-          {/* <Image
-            style={styles.image}
-            source={{
-              uri: imageList[1]//'https://firebasestorage.googleapis.com/v0/b/snapchatapp-de814.appspot.com/o/b8b40622-f1e1-4c73-8f50-840bdd85266b?alt=media&token=abf69362-2762-4b5d-8532-0e55fd6dd0ad'
-            }}
-          />
-          <Image source={require("https://firebasestorage.googleapis.com/v0/b/snapchatapp-de814.appspot.com/o/b8b40622-f1e1-4c73-8f50-840bdd85266b?alt=media&token=abf69362-2762-4b5d-8532-0e55fd6dd0ad")} style={styles.image} />*/}
-
-          {imageList &&
-            <FlatList
-              data={imageList}
-              renderItem={({ item }) => <Image source={{ uri: item.toString() }} style={styles.image} />} />
-          }
-        </View>
       </View>
 
     </View>

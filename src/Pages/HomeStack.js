@@ -5,7 +5,7 @@ const Stack = createNativeStackNavigator();
 
 import Home from './Home';
 
-const Movies = ({ navigation }) => {
+const HomeStack = ({ navigation }) => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} options={{
@@ -16,4 +16,4 @@ const Movies = ({ navigation }) => {
     );
 };
 
-export default Movies;
+export default HomeStack;
