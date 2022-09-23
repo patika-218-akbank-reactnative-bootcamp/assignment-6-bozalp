@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -12,8 +12,10 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebaseConfig';
 import uuid from 'react-native-uuid';
 
-initializeApp(firebaseConfig);
+
 const Home = ({ navigation }) => {
+  initializeApp(firebaseConfig);
+
   const theme = useSelector((state) => state.theme.theme);
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -25,12 +27,10 @@ const Home = ({ navigation }) => {
       allowsEditing: true,
       quality: 1,
     });
-
-    console.log(result);
-
+    //console.log(result);
     if (!result.cancelled) {
       setImage(result.uri);
-      console.log(result.uri);
+      //console.log(result.uri);
     }
   };
 
@@ -53,29 +53,28 @@ const Home = ({ navigation }) => {
     const storage = getStorage();
     const fileRef = ref(storage, uuid.v4());
     const result = await uploadBytes(fileRef, blob);
-
-    // We're done with the blob, close and release it
     blob.close();
-
-    // return await getDownloadURL(fileRef);
+    Alert.alert("Image shared");
+    setImage(null);
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-      <Text style={[styles.header_text, { color: theme.color }]}>Share image</Text>
-      <View>
-        <Button title="Select from gallery" onPress={pickImage} />
+    <ScrollView style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
+      <View style={styles.container}>
+        <Text style={[styles.header_text, { color: theme.color }]}>Share image</Text>
+        <View>
+          <Button title="Select from gallery" onPress={pickImage} />
+        </View>
+        <View>
+          {image &&
+            <View style={{ alignItems: 'center' }}>
+              <Image source={{ uri: image }} style={styles.image} />
+              <Button title="Share image" onPress={uploadImage} />
+            </View>
+          }
+        </View>
       </View>
-      <View>
-        {image &&
-          <View style={{alignItems:'center'}}>
-            <Image source={{ uri: image }} style={styles.image} />
-            <Button title="Share image" onPress={uploadImage} />
-          </View>
-        }
-      </View>
-
-    </View>
+    </ScrollView>
   );
 }
 
@@ -89,13 +88,13 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 16,
     paddingTop: 10,
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   image:
   {
     width: 200,
     height: 300,
-    marginBottom:10
+    marginBottom: 10
   },
 });
 
