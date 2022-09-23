@@ -47,6 +47,7 @@ const Map = () => {
 
     useEffect(() => {
         getCurrentLocation();
+        Alert.alert("sa");
     }, []);
 
     /*const loc = {
